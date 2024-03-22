@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# Full Stack React Crud App Tutorial
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Instructions to start project
 
-## Available Scripts
+1. Open your terminal and cd into the "ui" directory: `cd ui` then run `npm install` after that finishes installing you can now run `npm start` and your react app will start running on http://localhost:3000/
+2. Open a new terminal (with the react app still running) and cd into the "api" directory: `cd api` then run `npm install` after that is finished installing you can now run `npm run dev` which will run your api on http://localhost:3001/
+3. Assuming you have your DynamoDB set up properly and updated the API_URL variable in the utils file with your deployed
+API url, you should be able to use the application now! Enjoy!
 
-In the project directory, you can run:
+## Technologies
 
-### `npm start`
+DynamoDB | Lambda | Amplify | Express | React | Node
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Helpful Docs
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Material UI
 
-### `npm test`
+#### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://mui.com/material-ui/getting-started/installation/
 
-### `npm run build`
+#### Icons
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+https://mui.com/material-ui/material-icons/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Express:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Getting Started
 
-### `npm run eject`
+https://expressjs.com/en/starter/hello-world.html
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### DynamoDB CRUD functions:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Create
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/example_dynamodb_PutItem_section.html
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Read
 
-## Learn More
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/example_dynamodb_Scan_section.html
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Update
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/example_dynamodb_UpdateItem_section.html
 
-### Code Splitting
+#### Delete
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/example_dynamodb_DeleteItem_section.html
 
-### Analyzing the Bundle Size
+## Instructions creating monorepo from scratch
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Creating React Application
 
-### Making a Progressive Web App
+1. Create a new directory (folder) in your project called ui
+2. Open your terminal and cd into this new directory: `cd ui`
+3. Now run the command: `npx create-react-app .`
+4. Now run the command `rm -rf .git` while still in the `ui` directory we created. This will remove git associated with this directory. We want git to be used in the root directory of our project and not in the ui folder that's why we are doing this
+5. You have successfully created your react application and can use the command `npm start` to start the app. To stop running the application `ctrl + c`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Creating API (Express Server)
 
-### Advanced Configuration
+1. Create a new directory (folder) in your project called api
+2. Open your terminal and cd into this new directory: `cd api`
+3. Run the command `npm init` this will ask you a handful of questions, just hit enter for each question. This will create our package.json for us
+4. Now we can install our dependencies `npm i express nodemon`
+5. Create a file in our api directory called `index.js` and add the following express code:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+const express = require("express");
+const app = express();
+const port = 3001;
 
-### Deployment
+app.get("/", (req, res) => {
+  res.send("Hello from express!");
+});
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
+```
 
-### `npm run build` fails to minify
+5. We want to add some scripts to our package.json so add the following:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+```
+
+6. We can start our API. While in the api directory run `npm start` and you can now go to `http://localhost:3001/` to see the "Hello from express!" message.
+
+### Pushing code to github
+
+1. Now is a good time to push your code to github. In the root directory of the project run: `git init` this will make the folder a git repository allowing us to run git commands in it.
+2. Now we can run the following commands to push our code to github like normal:
+
+```
+git add .
+git commit -m "feat: created ui and api"
+git branch -M main
+git remote add origin github-repo-url-goes-here
+git push -u origin main
+```
