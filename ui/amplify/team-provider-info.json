@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-magkoli-dev-204133-authRole",
+      "UnauthRoleArn": "arn:aws:iam::533267143493:role/amplify-magkoli-dev-204133-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::533267143493:role/amplify-magkoli-dev-204133-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-magkoli-dev-204133-deployment",
+      "UnauthRoleName": "amplify-magkoli-dev-204133-unauthRole",
+      "StackName": "amplify-magkoli-dev-204133",
+      "StackId": "arn:aws:cloudformation:us-east-1:533267143493:stack/amplify-magkoli-dev-204133/b05d4610-e912-11ee-9261-0affe94a5bf7",
+      "AmplifyAppId": "d31g1zaixy7qiy"
+    },
+    "categories": {
+      "auth": {
+        "magkoli701d060f": {}
+      }
+    }
+  }
+}

@@ -2,6 +2,9 @@ import express from "express";
 import serverless from "serverless-http";
 import cors from "cors";
 import { fetchTasks, createTasks, updateTasks, deleteTasks } from "./task.js";
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
 
 const app = express();
 const port = 3001;
