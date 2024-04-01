@@ -4,25 +4,14 @@ import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
 import { API_URL } from "../utils";
 
-export const UpdateTaskForm = ({
-  fetchTasks,
-  isDialogOpen,
-  setIsDialogOpen,
-  task,
-}) => {
+export const UpdateTaskForm = ({ fetchTasks, isDialogOpen, setIsDialogOpen, task, }) => {
   const { id, completed } = task;
   const [taskName, setTaskName] = useState("");
 
   const handleUpdateTaskName = async () => {
     try {
-      await axios.put(API_URL, {
-        id,
-        name: taskName,
-        completed,
-      });
-
+      await axios.put(API_URL, { id, name: taskName, completed,});
       await fetchTasks();
-
       setTaskName("");
     } catch (err) {
       console.log(err);
@@ -33,20 +22,13 @@ export const UpdateTaskForm = ({
     <Dialog open={isDialogOpen}>
       <DialogTitle>Edit Task</DialogTitle>
       <div className="dialog">
-        <TextField
-          size="small"
-          label="Task"
-          variant="outlined"
-          onChange={(e) => setTaskName(e.target.value)}
-        />
+        <TextField size="small" label="Task" variant="outlined" onChange={(e) => setTaskName(e.target.value)} />
         <Button
           variant="contained"
           onClick={async () => {
-            await handleUpdateTaskName();
-            
+            await handleUpdateTaskName();   
             setIsDialogOpen(false);
-          }}
-        >
+          }}>
           <CheckIcon />
         </Button>
       </div>

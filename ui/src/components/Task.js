@@ -14,11 +14,7 @@ export const Task = ({ task, fetchTasks }) => {
 
   const handleUpdateTaskCompletion = async () => {
     try {
-      await axios.put(API_URL, {
-        id,
-        name,
-        completed: !isComplete,
-      });
+      await axios.put(API_URL, { id, name, completed: !isComplete, });
       setIsComplete((prev) => !prev);
     } catch (err) {
       console.log(err);
@@ -28,7 +24,6 @@ export const Task = ({ task, fetchTasks }) => {
   const handleDeleteTask = async () => {
     try {
       await axios.delete(`${API_URL}/${task.id}`);
-
       await fetchTasks();
     } catch (err) {
       console.log(err);
@@ -37,11 +32,7 @@ export const Task = ({ task, fetchTasks }) => {
 
   return (
     <div className="task">
-      <div
-        className={classnames("flex", {
-          done: isComplete,
-        })}
-      >
+      <div className={classnames("flex", { done: isComplete, })}>
         <Checkbox checked={isComplete} onChange={handleUpdateTaskCompletion} />
         <Typography variant="h4">{name}</Typography>
       </div>
@@ -53,12 +44,7 @@ export const Task = ({ task, fetchTasks }) => {
           <DeleteIcon />
         </Button>
       </div>
-      <UpdateTaskForm
-        fetchTasks={fetchTasks}
-        isDialogOpen={isDialogOpen}
-        setIsDialogOpen={setIsDialogOpen}
-        task={task}
-      />
+      <UpdateTaskForm fetchTasks={fetchTasks} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} task={task}/>
     </div>
   );
 };
