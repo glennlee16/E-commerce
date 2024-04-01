@@ -5,6 +5,7 @@ import crypto from "crypto";
 const client = new DynamoDBClient({ region: "us-east-1" });
 const docClient = DynamoDBDocumentClient.from(client);
 
+// Function to fetch tasks from the DynamoDB table
 export const fetchTasks = async () => {
   const command = new ScanCommand({
     ExpressionAttributeNames: { "#name": "name" },
@@ -15,6 +16,7 @@ export const fetchTasks = async () => {
   return response;
 };
 
+// Function to create a new task in the DynamoDB table
 export const createTasks = async ({ name, completed }) => {
   const uuid = crypto.randomUUID();
   const command = new PutCommand({
@@ -25,6 +27,7 @@ export const createTasks = async ({ name, completed }) => {
   return response;
 };
 
+// Function to update an existing task in the DynamoDB table
 export const updateTasks = async ({ id, name, completed }) => {
   const command = new UpdateCommand({
     TableName: "CloudTest",
@@ -38,6 +41,7 @@ export const updateTasks = async ({ id, name, completed }) => {
   return response;
 };
 
+// Function to delete a task from the DynamoDB table by ID
 export const deleteTasks = async (id) => {
   const command = new DeleteCommand({
     TableName: "CloudTest",

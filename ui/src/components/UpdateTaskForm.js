@@ -4,10 +4,14 @@ import CheckIcon from "@mui/icons-material/Check";
 import axios from "axios";
 import { API_URL } from "../utils";
 
+// Component to update a task
 export const UpdateTaskForm = ({ fetchTasks, isDialogOpen, setIsDialogOpen, task, }) => {
   const { id, completed } = task;
+
+  // State to manage the updated task name
   const [taskName, setTaskName] = useState("");
 
+  // Function to update the task name
   const handleUpdateTaskName = async () => {
     try {
       await axios.put(API_URL, { id, name: taskName, completed,});

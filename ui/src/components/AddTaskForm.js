@@ -6,11 +6,15 @@ import { createTheme } from "@mui/material/styles";
 import axios from "axios";
 import { API_URL } from "../utils";
 
+// Create a custom theme for the title typography
 const titleTheme = createTheme({ typography: { fontFamily: 'Verdana', }, });
 
+// Component to add a new task
 export const AddTaskForm = ({ fetchTasks }) => {
+  // State to store the new task name
   const [newTask, setNewTask] = useState("");
 
+  // Function to add a new task
   const addNewTask = async () => {
     try {
       await axios.post(API_URL, { name: newTask, completed: false, });

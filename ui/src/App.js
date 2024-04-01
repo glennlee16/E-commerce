@@ -3,16 +3,20 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import axios from "axios";
 
+// Import components
 import { AddTaskForm } from "./components/AddTaskForm";
 import { Task } from "./components/Task";
 import { API_URL } from "./utils";
 
+// Create a light theme
 const lightTheme = createTheme({ palette: {mode: "light",}, });
 
-export default function App() 
-{
+// Main App component
+export default function App() {
+  // State to store the tasks
   const [tasks, setTasks] = useState([]);
 
+  // Function to fetch tasks from the API
   const fetchTasks = async () => {
     try {
       const { data } = await axios.get(API_URL);
@@ -22,6 +26,7 @@ export default function App()
     }
   };
 
+  // Fetching tasks on component mount
   useEffect(() => {fetchTasks();}, []);
 
   return (

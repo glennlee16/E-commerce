@@ -7,11 +7,15 @@ import classnames from "classnames";
 import axios from "axios";
 import { API_URL } from "../utils";
 
+// Component to display a single task
 export const Task = ({ task, fetchTasks }) => {
   const { id, name, completed } = task;
+
+  // State for managing task completion
   const [isComplete, setIsComplete] = useState(completed);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  // Function to update the completion status of the task
   const handleUpdateTaskCompletion = async () => {
     try {
       await axios.put(API_URL, { id, name, completed: !isComplete, });
@@ -21,6 +25,7 @@ export const Task = ({ task, fetchTasks }) => {
     }
   };
 
+  // Function to delete the task
   const handleDeleteTask = async () => {
     try {
       await axios.delete(`${API_URL}/${task.id}`);

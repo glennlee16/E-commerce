@@ -8,14 +8,17 @@ const port = 3001;
 
 app.use(express.json());
 
+// Enabling CORS in development environment
 if (process.env.DEVELOPMENT) {
   app.use(cors());
 }
 
+// Root route - respond with "Hello World!"
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+// Route to fetch tasks
 app.get("/task", async (req, res) => {
   try {
     const tasks = await fetchTasks();
@@ -25,6 +28,7 @@ app.get("/task", async (req, res) => {
   }
 });
 
+// Route to create a new task
 app.post("/task", async (req, res) => {
   try {
     const task = req.body;
@@ -35,6 +39,7 @@ app.post("/task", async (req, res) => {
   }
 });
 
+// Route to update an existing task
 app.put("/task", async (req, res) => {
   try {
     const task = req.body;
@@ -45,6 +50,7 @@ app.put("/task", async (req, res) => {
   }
 });
 
+// Route to delete a task
 app.delete("/task/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -55,6 +61,7 @@ app.delete("/task/:id", async (req, res) => {
   }
 });
 
+// Starting the server in development environment
 if (process.env.DEVELOPMENT) {
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
