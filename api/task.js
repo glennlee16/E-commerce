@@ -4,7 +4,7 @@ import crypto from "crypto";
 
 // Set up connections to multiple global tables in different regions
 const currentRegion = process.env.AWS_DEFAULT_REGION;
-const replicatedRegions = ['ap-northeast-2', 'ap-southeast-1'];
+const replicatedRegions = ['ap-northeast-1', 'ap-northeast-2'];
 
 // Fallback to the first available
 const region = replicatedRegions.find((r) => r === currentRegion) || replicatedRegions[0];
