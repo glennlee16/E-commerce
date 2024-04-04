@@ -1,9 +1,16 @@
-import { ListTablesCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { UpdateCommand, PutCommand, DynamoDBDocumentClient, ScanCommand, DeleteCommand, } from "@aws-sdk/lib-dynamodb";
 import crypto from "crypto";
 
-const client = new DynamoDBClient({ region: "us-east-1" });
-const docClient = DynamoDBDocumentClient.from(client);
+// Set up connections to multiple global tables in different regions
+const currentRegion = process.env.AWS_DEFAULT_REGION;
+const replicatedRegions = ['ap-northeast-2', 'ap-southeast-1'];
+
+// Fallback to the first available
+const region = replicatedRegions.find((r) => r === currentRegion) || replicatedRegions[0];
+
+const ddb = new DynamoDB({ region, });
+const docClient = DynamoDBDocumentClient.from(ddb);
 
 // Function to fetch tasks from the DynamoDB table
 export const fetchTasks = async () => {
